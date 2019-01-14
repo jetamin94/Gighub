@@ -28,6 +28,14 @@ span.field-validation-error {
     font-weight: bold;
 }
 
+.voffset { margin-top: 2px; }
+.voffset1 { margin-top: 5px; }
+.voffset2 { margin-top: 10px; }
+.voffset3 { margin-top: 20px; }
+.voffset4 { margin-top: 40px; }
+.voffset5 { margin-top: 80px; }
+
+
 /* Bootstrap Overrides*/
 .navbar-inverse {
     background-color: #ff4342;
@@ -45,6 +53,19 @@ body {
     font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.form-control {
+    font-size: 17px;
+    /* padding: 20px 15px; */
+    height: 44px;
+    -ms-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.btn {
+    -ms-border-radius: 9px;
+    border-radius: 9px;
+}
+
 /* Page-level styles*/
 .gigs {
     list-style: none;
@@ -57,6 +78,7 @@ body {
 
 .gigs > li .details {
     position: absolute;
+    width: 130px;
     top: 0px;
     left: 70px;
 }
@@ -90,4 +112,12 @@ body {
 
 .gigs > li .details .genre {
     font-size: 15px;
+}
+.gigs > li .actions {
+    font-size: 15px;
+    display: none;
+}
+
+.gigs > li:hover .actions {
+    display: block
 }

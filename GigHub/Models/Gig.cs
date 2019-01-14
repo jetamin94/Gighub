@@ -11,7 +11,9 @@ namespace GigHub.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+
+        public bool IsCanceled { get; set; }
 
         public ApplicationUser Artist { get; set; }
 

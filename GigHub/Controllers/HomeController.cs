@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GigHub.Models;
+using GigHub.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace GigHub.Controllers
 {
@@ -19,11 +20,25 @@ namespace GigHub.Controllers
 
         public ActionResult Index()
         {
-            var upcommingGigs = _context.Gigs
+            var userId = User.Identity.GetUserId();
+
+            var upcomingGigs = _context.Gigs
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
-                .Where(g => g.DateTime > DateTime.Now);
-            return View(upcommingGigs);
+                .Where(g => g.DateTime > DateTime.Now && !g.IsCanceled);
+
+            var goingGigs = _context.Attendances
+                .Where(a => a.AttendeeId == userId)
+                .ToList();
+
+            var viewModel = new GigsViewModel
+            {
+                UpcomingGigs = upcomingGigs,
+                GoingGigs = goingGigs,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Upcoming Gigs"
+            };
+            return View("Gigs", viewModel);
         }
 
         public ActionResult About()
